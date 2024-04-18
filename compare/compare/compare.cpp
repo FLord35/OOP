@@ -29,7 +29,6 @@ Args ParseArgs(int argc, char* argv[])
 
 bool CompareStrings(std::ifstream& firstFile, std::ifstream& secondFile, int& line)
 {
-
     std::string firstFileLine;
     std::string secondFileLine;
     while (std::getline(firstFile, firstFileLine) && std::getline(secondFile, secondFileLine))
@@ -48,10 +47,15 @@ bool CompareStrings(std::ifstream& firstFile, std::ifstream& secondFile, int& li
 
         line++;
 
-        if (firstFileLine.compare(secondFileLine) != 0)
+        if (firstFileLine.compare(secondFileLine) != 0 || firstFileLine.empty() || secondFileLine.empty())
         {
             return false;
         }
+    }
+    if (std::getline(firstFile, firstFileLine) || std::getline(secondFile, secondFileLine))
+    {
+        line++;
+        return false;
     }
 
     return true;
@@ -70,7 +74,7 @@ void CompareFiles(Args& args)
     //Открываем второй файл
     std::ifstream secondFile;
     secondFile.open(args.secondFileName);
-    if (!firstFile.is_open())
+    if (!secondFile.is_open())
     {
         throw std::string{"Failed to open " + args.secondFileName + " for reading"};
     }
@@ -109,6 +113,6 @@ int main(int argc, char* argv[])
         return 2;
     }
     
-    std::cout << "Files are equal";
+    std::cout << "Files are equal" << std::endl;
     return 0;
 }
