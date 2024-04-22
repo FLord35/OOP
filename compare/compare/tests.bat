@@ -63,7 +63,7 @@ echo Test 11 passed
 
 REM Сравнение двух одинаковых файлов с особыми символами
 %MyProgram% AverageFile.txt AverageFileWithNewLineInTheEnd.txt || goto err
-fc AverageFile.txt AverageFileWithNewLineInTheEnd.txt > nil || goto err
+fc AverageFile.txt AverageFileWithNewLineInTheEnd.txt > nul || goto err
 echo Test 12 passed
 
 
