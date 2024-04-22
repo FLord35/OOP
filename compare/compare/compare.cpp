@@ -47,7 +47,7 @@ bool CompareStrings(std::ifstream& firstFile, std::ifstream& secondFile, int& li
 
         line++;
 
-        if (firstFileLine.compare(secondFileLine) != 0 || firstFileLine.empty() || secondFileLine.empty())
+        if (firstFileLine.compare(secondFileLine) != 0)
         {
             return false;
         }
