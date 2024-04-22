@@ -28,5 +28,10 @@
     <Text Include="Empty.txt" />
     <Text Include="AverageFile.txt" />
     <Text Include="EmptyCopy.txt" />
+    <Text Include="AverageFileWithDifferences.txt" />
+    <Text Include="AverageFileWithNewLineInTheEnd.txt" />
+    <Text Include="SpecialSymbols.txt" />
+    <Text Include="AverageFileWithNewLineInTheMiddle.txt" />
+    <Text Include="AverageFileWithMinorSpellingMistake.txt" />
   </ItemGroup>
 </Project>

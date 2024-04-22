@@ -150,8 +150,13 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="AverageFile.txt" />
+    <Text Include="AverageFileWithDifferences.txt" />
+    <Text Include="AverageFileWithMinorSpellingMistake.txt" />
+    <Text Include="AverageFileWithNewLineInTheEnd.txt" />
+    <Text Include="AverageFileWithNewLineInTheMiddle.txt" />
     <Text Include="Empty.txt" />
     <Text Include="EmptyCopy.txt" />
+    <Text Include="SpecialSymbols.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

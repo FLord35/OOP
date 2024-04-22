@@ -52,6 +52,7 @@ bool CompareStrings(std::ifstream& firstFile, std::ifstream& secondFile, int& li
             return false;
         }
     }
+    //Проверяем, остались ли ещё непрочитанные строки в одном из файлов
     if (std::getline(firstFile, firstFileLine) || std::getline(secondFile, secondFileLine))
     {
         line++;

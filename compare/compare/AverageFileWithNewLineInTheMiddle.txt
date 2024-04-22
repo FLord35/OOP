@@ -1,0 +1,7 @@
+This is your average file containing some (possibly) important information
+
+
+For example:
+1)Your name
+2)Your address
+3)Your favourite food
