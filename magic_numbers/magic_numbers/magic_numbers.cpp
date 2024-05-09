@@ -20,7 +20,7 @@ struct Args
 
 std::optional<Args> ParseArgs(int argc, char* argv[])
 {
-    if (argc != 1 || argc != 3) //Проверяем верное кол-во аргументов командной строки
+    if (argc != 1 && argc != 3) //Проверяем верное кол-во аргументов командной строки
     {
         throw std::string{"Invalid arguments count\n" + USAGE_MESSAGE};
     }
@@ -31,9 +31,10 @@ std::optional<Args> ParseArgs(int argc, char* argv[])
         {
             throw std::string{"Invalid command\n" + USAGE_MESSAGE};
         }
-        Args args;
-        args.command = argv[1];
-        args.numberArgument = (uint64_t)argv[2];
+        std::optional<Args> args;
+        args = { "temp" , 0 };
+        args->command = argv[1];
+        args->numberArgument = _strtoui64(argv[2], NULL, 10);
         return args;
     }
     else
@@ -72,7 +73,7 @@ void CheckMagicNumbers()
 
     if (*p) //Число не соответствует типу uint64_t или вообще не является числом
     {
-        throw std::string{"Error\n"};
+        throw std::string{"Error"};
     }
     else //Число соответствует типу uint64_t
     {
@@ -103,7 +104,7 @@ int main(int argc, char* argv[])
     try
     {
         auto args = ParseArgs(argc, argv);
-        if (args = std::nullopt)
+        if (!args)
         {
             CheckMagicNumbers();
         }
@@ -120,4 +121,3 @@ int main(int argc, char* argv[])
 
     return 0;
 }
-
