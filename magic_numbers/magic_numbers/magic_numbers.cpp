@@ -71,7 +71,7 @@ void CheckMagicNumbers()
     char* p;
     uint64_t convertedNumber = _strtoui64(line.c_str(), &p, 10);
 
-    if (*p) //Число не соответствует типу uint64_t или вообще не является числом
+    if (*p || line[0] == '-' || convertedNumber == UINT64_MAX) //Число не соответствует типу uint64_t или вообще не является числом
     {
         throw std::string{"Error"};
     }
