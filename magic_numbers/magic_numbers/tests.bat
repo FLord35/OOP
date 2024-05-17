@@ -15,10 +15,12 @@ REM Начало тестов
 
 REM Запуск программы с одним аргументом
 %MyProgram% -find > %MyOut% && goto err
+fc %MyOut% InvalidArguments-out.txt > nul || goto err
 echo Test 1 passed
 
 REM Запуск программы с тремя аргументами
 %MyProgram% -find me numbers > %MyOut% && goto err
+fc %MyOut% InvalidArguments-out.txt > nul || goto err
 echo Test 2 passed
 
 REM Ввод в основной функционал программы положительного числа в рамках uint64_t

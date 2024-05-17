@@ -31,6 +31,7 @@ bool CompareStrings(std::ifstream& firstFile, std::ifstream& secondFile, int& li
 {
     std::string firstFileLine;
     std::string secondFileLine;
+    //TODO: Разбить условие, && с функциями следует избегать
     while (std::getline(firstFile, firstFileLine) && std::getline(secondFile, secondFileLine))
     {
         if (firstFile.bad())
@@ -105,13 +106,14 @@ int main(int argc, char* argv[])
     }
     catch (int mismatchLine)
     {
+        //TODO: Строки в константы
         std::cout << "Files are different. Line number is " << mismatchLine << std::endl;
         return 1;
     }
     catch(std::string& errorMessage)
     {
         std::cout << errorMessage << std::endl;
-        return 2;
+        return 1;
     }
     
     std::cout << "Files are equal" << std::endl;

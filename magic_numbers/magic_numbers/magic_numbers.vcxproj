@@ -158,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="BigNumber.txt" />
+    <Text Include="InvalidArguments-out.txt" />
     <Text Include="NegativeNumber.txt" />
     <Text Include="NotANumber.txt" />
     <Text Include="StandardPositiveNumber-out.txt" />
