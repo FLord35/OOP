@@ -158,7 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="BigNumber.txt" />
+    <Text Include="FindCommand-out.txt" />
     <Text Include="InvalidArguments-out.txt" />
+    <Text Include="InvalidCommand-out.txt" />
     <Text Include="InvalidNumber-out.txt" />
     <Text Include="NegativeNumber.txt" />
     <Text Include="NotANumber.txt" />

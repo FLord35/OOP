@@ -34,5 +34,7 @@
     <Text Include="NotANumber.txt" />
     <Text Include="InvalidArguments-out.txt" />
     <Text Include="InvalidNumber-out.txt" />
+    <Text Include="FindCommand-out.txt" />
+    <Text Include="InvalidCommand-out.txt" />
   </ItemGroup>
 </Project>
