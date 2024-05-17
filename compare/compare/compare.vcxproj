@@ -154,8 +154,14 @@
     <Text Include="AverageFileWithMinorSpellingMistake.txt" />
     <Text Include="AverageFileWithNewLineInTheEnd.txt" />
     <Text Include="AverageFileWithNewLineInTheMiddle.txt" />
+    <Text Include="DifferentFilesAtLineFour-out.txt" />
+    <Text Include="DifferentFilesAtLineSix-out.txt" />
+    <Text Include="DifferentFIlesAtLineThree-out.txt" />
     <Text Include="Empty.txt" />
     <Text Include="EmptyCopy.txt" />
+    <Text Include="EqualFiles-out.txt" />
+    <Text Include="InvalidArguments-out.txt" />
+    <Text Include="MissingFile-out.txt" />
     <Text Include="SpecialSymbols.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

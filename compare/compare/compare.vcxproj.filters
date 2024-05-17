@@ -33,5 +33,11 @@
     <Text Include="SpecialSymbols.txt" />
     <Text Include="AverageFileWithNewLineInTheMiddle.txt" />
     <Text Include="AverageFileWithMinorSpellingMistake.txt" />
+    <Text Include="InvalidArguments-out.txt" />
+    <Text Include="EqualFiles-out.txt" />
+    <Text Include="MissingFile-out.txt" />
+    <Text Include="DifferentFilesAtLineSix-out.txt" />
+    <Text Include="DifferentFilesAtLineFour-out.txt" />
+    <Text Include="DifferentFIlesAtLineThree-out.txt" />
   </ItemGroup>
 </Project>
