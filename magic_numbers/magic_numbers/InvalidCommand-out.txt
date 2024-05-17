@@ -1,0 +1,5 @@
+Invalid command
+Usage:
+1)magic_numbers.exe
+Or
+2)magic_numbers.exe -find <number>

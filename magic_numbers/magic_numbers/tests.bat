@@ -35,22 +35,27 @@ echo Test 4 passed
 
 REM Ввод в основной функционал программы отрицательного числа
 %MyProgram% < NegativeNumber.txt > %MyOut% && goto err
+fc %MyOut% InvalidNumber-out.txt > nul || goto err
 echo Test 5 passed
 
 REM Ввод в основной функционал программы числа вне рамок uint64_t
 %MyProgram% < BigNumber.txt > %MyOut% && goto err
+fc %MyOut% InvalidNumber-out.txt > nul || goto err
 echo Test 6 passed
 
 REM Ввод в основной функционал программы не числа
 %MyProgram% < NotANumber.txt > %MyOut% && goto err
+fc %MyOut% InvalidNumber-out.txt > nul || goto err
 echo Test 7 passed
 
 REM Запуск поискового функционала программы с положительным числом
 %MyProgram% -find 5 > %MyOut% || goto err
+fc %MyOut% FindCommand-out.txt > nul || goto err
 echo Test 8 passed
 
 REM Попытка запуска поискового функционала программы с ошибкой
 %MyProgram% -fins 5 > %MyOut% && goto err
+fc %MyOut% InvalidCommand-out.txt > nul || goto err
 echo Test 9 passed
 
 

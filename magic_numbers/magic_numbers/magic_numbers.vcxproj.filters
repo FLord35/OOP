@@ -33,5 +33,6 @@
     <Text Include="BigNumber.txt" />
     <Text Include="NotANumber.txt" />
     <Text Include="InvalidArguments-out.txt" />
+    <Text Include="InvalidNumber-out.txt" />
   </ItemGroup>
 </Project>
