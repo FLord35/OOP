@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="prime_numbers.cpp">
+    <ClCompile Include="prime_numbers-tests.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="prime_generator.cpp">
+    <ClCompile Include="..\prime_numbers\prime_generator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="prime_generator.h">
+    <ClInclude Include="..\prime_numbers\prime_generator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

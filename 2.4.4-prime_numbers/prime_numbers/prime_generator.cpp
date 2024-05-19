@@ -14,6 +14,8 @@ void CheckUpperBound(int upperBound)
 
 std::set<int> GeneratePrimeNumbersSet(int upperBound)
 {
+    CheckUpperBound(upperBound);
+
     std::set<int> setOfPrimeNumbers;
     std::vector<bool> vectorOfPrimeEntries(upperBound + 1, true);
 

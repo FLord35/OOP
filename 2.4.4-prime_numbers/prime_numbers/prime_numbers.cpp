@@ -31,7 +31,6 @@ int main(int argc, char* argv[])
     try
     {
         auto args = ParseArgs(argc, argv);
-        CheckUpperBound(args.upperBound);
         OutputSet(GeneratePrimeNumbersSet(args.upperBound));
     }
     catch (std::string& errorMessage)
