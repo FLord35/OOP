@@ -22,6 +22,7 @@ Args ParseArgs(int argc, char* argv[])
 
     Args args;
     args.upperBound = std::stoi(argv[1]);
+    //TODO: При вводе "" программа ничего не выдаёт. Исправить
 
     return args;
 }
