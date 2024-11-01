@@ -4,12 +4,12 @@ LogicCoordinator::LogicCoordinator()
 {
 }
 
-void LogicCoordinator::InputBodies()
+void LogicCoordinator::InputBodies(std::istream& inputStream)
 {
 	std::string bodyType;
 	double density;
 
-	std::cin >> bodyType;
+	inputStream >> bodyType;
 
 	while (bodyType != bd::INPUT_EXIT_COMMAND)
 	{
@@ -17,7 +17,7 @@ void LogicCoordinator::InputBodies()
 		{
 			double radius;
 
-			std::cin >> density >> radius;
+			inputStream >> density >> radius;
 
 			CSphere sphere(density, radius);
 			vectorOfBodies.push_back(std::make_shared<CSphere>(sphere));
@@ -28,7 +28,7 @@ void LogicCoordinator::InputBodies()
 			double height;
 			double depth;
 
-			std::cin >> density >> width >> height >> depth;
+			inputStream >> density >> width >> height >> depth;
 
 			CParallelepiped parallelepiped(density, width, height, depth);
 			vectorOfBodies.push_back(std::make_shared<CParallelepiped>(parallelepiped));
@@ -38,7 +38,7 @@ void LogicCoordinator::InputBodies()
 			double baseRadius;
 			double height;
 
-			std::cin >> density >> baseRadius >> height;
+			inputStream >> density >> baseRadius >> height;
 
 			CCone cone(density, baseRadius, height);
 			vectorOfBodies.push_back(std::make_shared<CCone>(cone));
@@ -48,38 +48,38 @@ void LogicCoordinator::InputBodies()
 			double baseRadius;
 			double height;
 
-			std::cin >> density >> baseRadius >> height;
+			inputStream >> density >> baseRadius >> height;
 
 			CCylinder cylinder(density, baseRadius, height);
 			vectorOfBodies.push_back(std::make_shared<CCylinder>(cylinder));
 		}
 		else
 		{
-			throw std::string{bd::ERROR_UNKNOWN_BODY_TYPE + bodyType + "\n"};
+			throw std::string{bd::UNKNOWN_BODY_TYPE_EXCEPTION_MESSAGE + bodyType + "\n"};
 		}
 
-		std::cin >> bodyType;
+		inputStream >> bodyType;
 	}
 
 	CalculateExtraProperties();
 }
 
-void LogicCoordinator::OutputBodies()
+void LogicCoordinator::OutputBodies(std::ostream& outputStream)
 {
-	std::cout << "OUTPUT: " << std::endl;
+	outputStream << "OUTPUT:" << std::endl;
 
 	for (auto& body : vectorOfBodies)
 	{
-		std::cout << body->ToString() << std::endl;
+		outputStream << body->ToString() << std::endl;
 	}
 }
 
-void LogicCoordinator::OutputExtraProperties()
+void LogicCoordinator::OutputExtraProperties(std::ostream& outputStream)
 {
-	std::cout << std::endl << "EXTRA OUTPUT: " << std::endl;
+	outputStream << "EXTRA OUTPUT:" << std::endl;
 
-	std::cout << highestMassBodyIndex->ToString() << std::endl;
-	std::cout << lightestInWaterBodyIndex->ToString() << std::endl;
+	outputStream << highestMassBodyIndex->ToString() << std::endl;
+	outputStream << lightestInWaterBodyIndex->ToString() << std::endl;
 }
 
 void LogicCoordinator::CalculateExtraProperties()
@@ -87,7 +87,23 @@ void LogicCoordinator::CalculateExtraProperties()
 	double currentMaxMass = -1.0;
 	double currentMinWeight = std::numeric_limits<double>().max();
 
-	for (auto& body : vectorOfBodies)
+	using ptr = std::shared_ptr<CBody>;
+
+	auto massCompareFunction = [](ptr left, ptr right) 
+	{
+		return left->GetMass() < right->GetMass(); 
+	};
+
+	highestMassBodyIndex = *std::max_element(vectorOfBodies.begin(), vectorOfBodies.end(), massCompareFunction);
+
+	auto weightCompareFunction = [](ptr left, ptr right) 
+	{
+		return left->GetWeightInWater() < right->GetWeightInWater();
+	};
+
+	lightestInWaterBodyIndex = *std::min_element(vectorOfBodies.begin(), vectorOfBodies.end(), weightCompareFunction);
+
+	/*for (auto& body : vectorOfBodies)
 	{
 		double mass = body->GetMass();
 		double weight = (body->GetDensity() - bd::waterDensity) * bd::g * body->GetVolume();
@@ -103,5 +119,5 @@ void LogicCoordinator::CalculateExtraProperties()
 			currentMinWeight = weight;
 			lightestInWaterBodyIndex = body;
 		}
-	}
+	}*/
 }

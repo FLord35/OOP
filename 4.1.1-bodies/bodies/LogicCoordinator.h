@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <numeric>
+#include <algorithm>
 #include "CBody.h"
 #include "CCone.h"
 #include "CCylinder.h"
@@ -15,10 +16,10 @@ class LogicCoordinator
 	public:
 		LogicCoordinator();
 
-		void InputBodies();
-		void OutputBodies();
+		void InputBodies(std::istream& inputStream);
+		void OutputBodies(std::ostream& outputStream);
 
-		void OutputExtraProperties();
+		void OutputExtraProperties(std::ostream& outputStream);
 
 	private:
 		std::vector<std::shared_ptr<CBody>> vectorOfBodies;

@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <sstream>
 #include "LogicCoordinator.h"
 
 int main()
@@ -7,9 +8,9 @@ int main()
     {
         LogicCoordinator logicCoordinator;
 
-        logicCoordinator.InputBodies();
-        logicCoordinator.OutputBodies();
-        logicCoordinator.OutputExtraProperties();
+        logicCoordinator.InputBodies(std::cin);
+        logicCoordinator.OutputBodies(std::cout);
+        logicCoordinator.OutputExtraProperties(std::cout);
     }
     catch (std::string& errorMessage)
     {

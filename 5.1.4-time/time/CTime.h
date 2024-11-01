@@ -3,9 +3,10 @@
 #include <iostream>
 
 const std::string OUT_OF_RANGE_EXCEPTION_MESSAGE = "exception: out of range";
+const std::string DIVISION_BY_ZERO_EXCEPTION_MESSAGE = "exception: time cannot be divided by zero";
 const char OUTPUT_STREAM_SEPARATOR = ':';
 
-const int SECONDS_IN_A_DAY = 86399;
+const int SECONDS_IN_A_DAY = 86400;
 const int SECONDS_IN_A_MINUTE = 60;
 const int SECONDS_IN_AN_HOUR = 3600;
 
@@ -28,6 +29,9 @@ class CTime
         //Возвращает количество секунд
         unsigned GetSeconds()const;
 
+        //Возвращает количество секунд после полуночи
+        unsigned GetTimestamp()const;
+
         //Кастомные операторы
         CTime& operator++();
         CTime& operator--();
@@ -47,8 +51,8 @@ class CTime
         int operator/(const CTime& time);
         CTime operator/(const int& number);
 
-        CTime& operator*=(const int& time);
-        CTime& operator/=(const int& time);
+        CTime& operator*=(const int& number);
+        CTime& operator/=(const int& number);
 
         friend std::ostream& operator<<(std::ostream& outputStream, const CTime& time);
         friend std::istream& operator>>(std::istream& inputStream, CTime& time);
@@ -69,7 +73,7 @@ class CTime
         //Проверяет, верное ли время сейчас хранится в классе
         bool IsTimeValid();
 
-        //Проверяет, верное ли время в передающемся объекте класса
-        bool IsTimeValid(int time);
+        //Проверяет, верное ли время в передающемся объекте
+        bool IsTimeValid(const int& time);
 };
 

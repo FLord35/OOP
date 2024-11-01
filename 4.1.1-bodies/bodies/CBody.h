@@ -10,6 +10,7 @@ class CBody
 		double GetDensity();
 		double GetVolume();
 		double GetMass();
+		double GetWeightInWater();
 		virtual std::string ToString() = 0;
 
 	protected:

@@ -18,3 +18,8 @@ double CBody::GetMass()
 {
 	return mass;
 }
+
+double CBody::GetWeightInWater()
+{
+	return (density - bd::waterDensity) * bd::g * volume;
+}

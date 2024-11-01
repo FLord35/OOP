@@ -24,5 +24,17 @@ namespace bd
 
 	const std::string INPUT_EXIT_COMMAND = "EXIT";
 
-	const std::string ERROR_UNKNOWN_BODY_TYPE = "Unknown body type: ";
+	const std::string UNKNOWN_BODY_TYPE_EXCEPTION_MESSAGE = "exception: unknown body type: ";
+
+	const std::string RADIUS_OUT_OF_RANGE_EXCEPTION_MESSAGE = "exception: radius is out of range";
+
+	const std::string WIDTH_OUT_OF_RANGE_EXCEPTION_MESSAGE = "exception: width is out of range";
+	const std::string HEIGHT_OUT_OF_RANGE_EXCEPTION_MESSAGE = "exception: height is out of range";
+	const std::string DEPTH_OUT_OF_RANGE_EXCEPTION_MESSAGE = "exception: depth is out of range";
+
+	const std::string BASE_RADIUS_OUT_OF_RANGE_EXCEPTION_MESSAGE = "exception: base radius is out of range";
+
+	const std::string DENSITY_OUT_OF_RANGE_EXCEPTION_MESSAGE = "exception: density is out of range";
+	const std::string VOLUME_OUT_OF_RANGE_EXCEPTION_MESSAGE = "exception: volume is out of range";
+	const std::string MASS_OUT_OF_RANGE_EXCEPTION_MESSAGE = "exception: mass is out of range";
 }

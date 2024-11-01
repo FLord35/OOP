@@ -4,9 +4,9 @@ CTime::CTime(unsigned inputHours, unsigned inputMinutes, unsigned inputSeconds)
 {
 	seconds = inputHours * SECONDS_IN_AN_HOUR + inputMinutes * SECONDS_IN_A_MINUTE + inputSeconds;
 
-	if (IsTimeValid())
+	if (!IsTimeValid())
 	{
-		throw std::out_of_range(OUT_OF_RANGE_EXCEPTION_MESSAGE);
+		throw std::string(OUT_OF_RANGE_EXCEPTION_MESSAGE);
 	}
 }
 
@@ -14,9 +14,9 @@ CTime::CTime(unsigned timeStamp)
 {
 	seconds = timeStamp;
 
-	if (IsTimeValid())
+	if (!IsTimeValid())
 	{
-		throw std::out_of_range(OUT_OF_RANGE_EXCEPTION_MESSAGE);
+		throw std::string(OUT_OF_RANGE_EXCEPTION_MESSAGE);
 	}
 }
 
@@ -27,10 +27,15 @@ unsigned CTime::GetHours() const
 
 unsigned CTime::GetMinutes() const
 {
-	return seconds / SECONDS_IN_A_MINUTE;
+	return (seconds % SECONDS_IN_AN_HOUR) / SECONDS_IN_A_MINUTE;
 }
 
 unsigned CTime::GetSeconds() const
+{
+	return (seconds % SECONDS_IN_AN_HOUR) % SECONDS_IN_A_MINUTE;
+}
+
+unsigned CTime::GetTimestamp() const
 {
 	return seconds;
 }
@@ -53,7 +58,7 @@ CTime& CTime::operator--()
 
 	if (!IsTimeValid())
 	{
-		seconds = SECONDS_IN_A_DAY;
+		seconds = SECONDS_IN_A_DAY - 1;
 	}
 
 	return *this;
@@ -75,11 +80,11 @@ CTime CTime::operator--(int)
 
 CTime CTime::operator+(const CTime& time)
 {
-	int temp = seconds + time.GetSeconds();
+	int temp = seconds + time.GetTimestamp();
 
 	if (!IsTimeValid(temp))
 	{
-		temp = temp - SECONDS_IN_A_DAY - 1;
+		temp = temp - SECONDS_IN_A_DAY;
 	}
 
 	CTime tempTime(temp);
@@ -89,11 +94,11 @@ CTime CTime::operator+(const CTime& time)
 
 CTime CTime::operator-(const CTime& time)
 {
-	int temp = seconds + time.GetSeconds();
+	int temp = seconds - time.GetTimestamp();
 
 	if (!IsTimeValid(temp))
 	{
-		temp = temp + SECONDS_IN_A_DAY + 1;
+		temp = temp + SECONDS_IN_A_DAY;
 	}
 
 	CTime tempTime(temp);
@@ -119,6 +124,21 @@ CTime CTime::operator*(const int& number)
 {
 	int temp = seconds * number;
 
+	if (temp < 0)
+	{
+		while (temp < 0)
+		{
+			temp = temp + SECONDS_IN_A_DAY;
+		}
+	}
+	else if (temp > SECONDS_IN_A_DAY)
+	{
+		while (temp > SECONDS_IN_A_DAY)
+		{
+			temp = temp - SECONDS_IN_A_DAY;
+		}
+	}
+
 	CTime tempTime(temp);
 
 	return tempTime;
@@ -126,44 +146,81 @@ CTime CTime::operator*(const int& number)
 
 CTime operator*(const int& number, const CTime& time)
 {
-	int temp = time.GetSeconds() * number;
+	int temp = time.GetTimestamp() * number;
 
-	return temp;
-}
-
-int CTime::operator/(const CTime& time)
-{
-	int temp = seconds / time.GetSeconds();
-
-	return temp;
-}
-
-CTime CTime::operator/(const int& number)
-{
-	int temp = seconds / number;
+	if (temp < 0)
+	{
+		while (temp < 0)
+		{
+			temp = temp + SECONDS_IN_A_DAY;
+		}
+	}
+	else if (temp > SECONDS_IN_A_DAY)
+	{
+		while (temp > SECONDS_IN_A_DAY)
+		{
+			temp = temp - SECONDS_IN_A_DAY;
+		}
+	}
 
 	CTime tempTime(temp);
 
 	return tempTime;
 }
 
-CTime& CTime::operator*=(const int& time)
+int CTime::operator/(const CTime& time)
 {
-	*this = *this * time;
+	int temp = seconds / time.GetTimestamp();
+
+	return temp;
+}
+
+CTime CTime::operator/(const int& number)
+{
+	if (number == 0)
+	{
+		throw std::string(DIVISION_BY_ZERO_EXCEPTION_MESSAGE);
+	}
+
+	int temp = seconds / number;
+
+	if (temp < 0)
+	{
+		while (temp < 0)
+		{
+			temp = temp + SECONDS_IN_A_DAY;
+		}
+	}
+	else if (temp > SECONDS_IN_A_DAY)
+	{
+		while (temp > SECONDS_IN_A_DAY)
+		{
+			temp = temp - SECONDS_IN_A_DAY;
+		}
+	}
+
+	CTime tempTime(temp);
+
+	return tempTime;
+}
+
+CTime& CTime::operator*=(const int& number)
+{
+	*this = *this * number;
 
 	return *this;
 }
 
-CTime& CTime::operator/=(const int& time)
+CTime& CTime::operator/=(const int& number)
 {
-	*this = *this / time;
+	*this = *this / number;
 
 	return *this;
 }
 
 bool CTime::operator==(const CTime& time) const
 {
-	if (GetSeconds() == time.GetSeconds())
+	if (GetTimestamp() == time.GetTimestamp())
 	{
 		return true;
 	}
@@ -190,7 +247,7 @@ bool CTime::operator<(const CTime& time) const
 
 bool CTime::operator>=(const CTime& time) const
 {
-	if (GetSeconds() >= time.GetSeconds())
+	if (GetTimestamp() >= time.GetTimestamp())
 	{
 		return true;
 	}
@@ -202,7 +259,7 @@ bool CTime::operator>=(const CTime& time) const
 
 bool CTime::operator<=(const CTime& time) const
 {
-	if (GetSeconds() <= time.GetSeconds())
+	if (GetTimestamp() <= time.GetTimestamp())
 	{
 		return true;
 	}
@@ -244,7 +301,7 @@ std::istream& operator>>(std::istream& inputStream, CTime& time)
 
 bool CTime::IsTimeValid()
 {
-	if (seconds > SECONDS_IN_A_DAY || seconds < 0)
+	if (seconds >= SECONDS_IN_A_DAY || seconds < 0)
 	{
 		return false;
 	}
@@ -254,9 +311,9 @@ bool CTime::IsTimeValid()
 	}
 }
 
-bool CTime::IsTimeValid(int time)
+bool CTime::IsTimeValid(const int& time)
 {
-	if (time > SECONDS_IN_A_DAY || seconds < 0)
+	if (time >= SECONDS_IN_A_DAY || time < 0)
 	{
 		return false;
 	}

@@ -1,13 +1,37 @@
 #include "CSphere.h"
 
-CSphere::CSphere(double inputDensity, double inputRadius):
+CSphere::CSphere(double inputDensity, double inputRadius) :
 	CBody()
 {
 	density = inputDensity;
 	radius = inputRadius;
 
-	volume = CalculateVolume();
-	mass = CalculateMass();
+	if (density < 0)
+	{
+		throw std::string(bd::DENSITY_OUT_OF_RANGE_EXCEPTION_MESSAGE);
+	}
+	if (radius < 0)
+	{
+		throw std::string(bd::RADIUS_OUT_OF_RANGE_EXCEPTION_MESSAGE);
+	}
+
+	if ((radius > (DBL_MAX / 4 / M_PI / pow(radius, 2)) * 3))
+	{
+		throw std::string(bd::VOLUME_OUT_OF_RANGE_EXCEPTION_MESSAGE);
+	}
+	else
+	{
+		volume = CalculateVolume();
+	}
+
+	if (density > DBL_MAX / volume)
+	{
+		throw std::string(bd::MASS_OUT_OF_RANGE_EXCEPTION_MESSAGE);
+	}
+	else
+	{
+		mass = CalculateMass();
+	}
 }
 
 double CSphere::GetRadius()
